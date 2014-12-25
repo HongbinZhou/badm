@@ -38,3 +38,5 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+# https://github.com/zealot128/ruby-habtm-generator
+gem 'habtm_generator', :group => :development

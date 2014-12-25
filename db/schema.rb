@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141225095224) do
+ActiveRecord::Schema.define(version: 20141225133153) do
 
   create_table "events", force: true do |t|
     t.date     "date"
@@ -20,8 +20,14 @@ ActiveRecord::Schema.define(version: 20141225095224) do
     t.float    "cost_per_person"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "event_id"
   end
+
+  create_table "events_people", id: false, force: true do |t|
+    t.integer "event_id"
+    t.integer "person_id"
+  end
+
+  add_index "events_people", ["event_id", "person_id"], name: "events_people_index", unique: true
 
   create_table "people", force: true do |t|
     t.string   "email"
@@ -29,7 +35,6 @@ ActiveRecord::Schema.define(version: 20141225095224) do
     t.float    "money"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "event_id"
   end
 
 end
