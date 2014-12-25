@@ -40,3 +40,6 @@ gem 'spring',        group: :development
 
 # https://github.com/zealot128/ruby-habtm-generator
 gem 'habtm_generator', :group => :development
+
+# https://github.com/plataformatec/simple_form#wrapping-rails-form-helpers
+gem 'simple_form'
