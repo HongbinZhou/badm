@@ -11,22 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141224154724) do
+ActiveRecord::Schema.define(version: 20141225095224) do
 
-  create_table "checkouts", force: true do |t|
+  create_table "events", force: true do |t|
     t.date     "date"
     t.string   "place"
-    t.integer  "total_cost"
+    t.float    "cost_total"
+    t.float    "cost_per_person"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_id"
   end
 
   create_table "people", force: true do |t|
-    t.string   "name"
     t.string   "email"
-    t.integer  "money"
+    t.string   "name"
+    t.float    "money"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_id"
   end
 
 end
