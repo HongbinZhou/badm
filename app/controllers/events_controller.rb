@@ -28,12 +28,24 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    # add attendees into event
-    for i in params[:attendees]
-      @event.people << Person.find_by(email: i)
+    attendees_no = params[:attendees].length
+
+    if attendees_no > 0
+      @event.cost_per_person = @event.cost_total / attendees_no
+
+      for email in params[:attendees]
+        person = Person.find_by(email: email)
+
+        # add attendees into event
+        @event.people << person
+        # update each attendee's money
+        person.money = person.money - @event.cost_per_person
+
+        person.save
+      end
+
     end
-    
-    @event.cost_per_person = @event.cost_total / @event.people.length
+
 
     # @event.people << Person
     respond_to do |format|
