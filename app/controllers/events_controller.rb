@@ -29,6 +29,8 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
+    @event.payer_id = params[:payer_id]
+
     attendees_no = params[:attendees].length
 
     if attendees_no > 0
@@ -92,6 +94,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:date, :place, :cost_total, :attendees)
+      params.require(:event).permit(:date, :place, :cost_total, :attendees, :payer_id)
     end
 end

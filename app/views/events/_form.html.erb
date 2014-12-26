@@ -33,10 +33,13 @@
 
   <!-- payer -->
   <div class="field">
-    <%= f.label :payer %><br>
-    <%= simple_form_for @person do |p| %>
-    <%= p.select :email, Person.all.map { |r| [r.name, r.email ] }, include_blank: true %>
-    <% end %>
+
+    <%= label_tag "Payer" %>
+    <%= select_tag(
+	:payer_id,
+	options_from_collection_for_select(Person.all, "id", "name")
+	) %>
+
   </div>
 
   <!-- attendees -->

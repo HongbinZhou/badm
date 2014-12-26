@@ -11,10 +11,15 @@
 </p>
 
 <p>
+  <strong>Payer:</strong>
+  <%= Person.find_by(id: @event.payer_id).name %>
+</p>
+
+<p>
   <strong>Cost total:</strong>
   <%= @event.cost_total %>
 </p>
-
+ 
 <p>
   <strong>参与者:</strong>
     <% @event.people.each do |person| %>
