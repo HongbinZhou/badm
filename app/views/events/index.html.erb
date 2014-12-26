@@ -6,13 +6,13 @@
       <th rowspan="2">Date</th>
       <th rowspan="2">Place</th>
       <th rowspan="2">Payer</th>
-      <th rowspan="1" colspan=<%= @people.length%>>People</th>
-      <th rowspan="2">Total Cost</th>
-      <th rowspan="2">Cost per Person</th>
+      <th rowspan="1" colspan=<%= Person.all.length%>>People</th>
+      <th rowspan="2">总花费</th>
+      <th rowspan="2">人均</th>
       <th rowspan="2" colspan="3"></th>
     </tr>
     <tr>
-	<% @people.each do |person| %>
+	<% Person.all.each do |person| %>
 	<th scope="col">
 	  <%= person.name %>
 	</th>
@@ -21,7 +21,7 @@
   </thead>
 
   <tbody>
-    <% @events.each do |event| %>
+    <% Event.all.each do |event| %>
       <tr>
         <td><%= event.date %></td>
         <td><%= event.place %></td>
@@ -32,7 +32,7 @@
 	<% end %>
 
 	<!-- list attendees -->
-	<% @people.each do |person| %>
+	<% Person.all.each do |person| %>
 	  <% if event.people.exists?(person)%>
 	  <td><%= -event.cost_per_person %> </td>
 	  <% else %>
@@ -44,7 +44,7 @@
         <td><%= event.cost_per_person %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -53,14 +53,11 @@
       <th>余额合计</th>
       <th></th>
       <th></th>
-      <th 
-
-	<% @people.each do |person| %>
-	<th scope="col">
-	  <%= person.money %>
-	</th>
-	<% end %>
-
+      <% Person.all.each do |person| %>
+      <th scope="col">
+	<%= person.money %>
+      </th>
+      <% end %>
       <th></th>
       <th></th>
       <th colspan="3"></th>

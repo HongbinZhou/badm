@@ -59,7 +59,12 @@ class EventsController < ApplicationController
     # @event.people << Person
     respond_to do |format|
       if @event.save
-        UserMailer.welcome_email(payer).deliver
+        email_obj = {}
+        email_obj["to"] = payer.email
+        email_obj["subject"] = 'Report'
+        email_obj["body"] = render_to_body(:template => "events/index", :layout => false)
+        UserMailer.deliver_report(email_obj).deliver
+
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
       else
