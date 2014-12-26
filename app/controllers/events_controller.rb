@@ -32,6 +32,11 @@ class EventsController < ApplicationController
 
     @event.payer_id = params[:payer_id]
 
+    payer = Person.find_by(id: @event.payer_id)
+    
+    payer.money = payer.money + @event.cost_total
+    payer.save
+
     attendees_no = params[:attendees].length
 
     if attendees_no > 0

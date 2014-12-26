@@ -43,3 +43,5 @@ gem 'habtm_generator', :group => :development
 
 # https://github.com/plataformatec/simple_form#wrapping-rails-form-helpers
 gem 'simple_form'
+
+gem 'byebug'
