@@ -22,6 +22,7 @@ class EventsController < ApplicationController
 
   # GET /events/1/edit
   def edit
+    @people = Person.all
   end
 
   # POST /events

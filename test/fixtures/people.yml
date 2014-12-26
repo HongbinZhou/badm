@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  email: MyString
-  name: MyString
-  money: 1.5
+  email: a@acom
+  name: aaa
+  money: 200
 
 two:
-  email: MyString
-  name: MyString
-  money: 1.5
+  email: b@b.com
+  name: bbb
+  money: 100
