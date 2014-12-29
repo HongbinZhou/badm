@@ -61,7 +61,7 @@ class EventsController < ApplicationController
       if @event.save
         email_obj = {}
         email_obj["to"] = Person.all.map{|p| p.email}
-        email_obj["subject"] = 'Badmintone Expense Update'
+        email_obj["subject"] = 'Badminton Expense Update'
         email_obj["body"] = render_to_body(:template => "events/index", :layout => false)
         UserMailer.deliver_report(email_obj).deliver
 
