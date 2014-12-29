@@ -34,7 +34,7 @@
 	<!-- list attendees -->
 	<% Person.all.each do |person| %>
 	  <% if event.people.exists?(person)%>
-	  <td><%= -event.cost_per_person %> </td>
+	  <td><%= - Cost.find_by(event_id: event.id, person_id: person.id).money %></td>
 	  <% else %>
           <td></td>
 	  <% end %>

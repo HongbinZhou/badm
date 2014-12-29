@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141226030627) do
+ActiveRecord::Schema.define(version: 20141229143213) do
+
+  create_table "costs", force: true do |t|
+    t.float    "money"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "person_id"
+    t.integer  "event_id"
+  end
 
   create_table "events", force: true do |t|
     t.date     "date"

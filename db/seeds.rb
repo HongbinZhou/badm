@@ -9,9 +9,9 @@
 # people = Person.create([{
 #                           name: 'aaa',
 #                           email: 'a@a.com',
-#                           money: 0.0
+#                           money: 100.0
 #                         },
 #                         {
 #                           name: 'bbb',
 #                           email: 'b@a.com',
-#                           money: 0.0} ])
+#                           money: 200.0} ])

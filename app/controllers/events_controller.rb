@@ -29,41 +29,52 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-
     @event.payer_id = params[:payer_id]
 
-    payer = Person.find_by(id: @event.payer_id)
-    
-    payer.money = payer.money + @event.cost_total
-    payer.save
-
-    attendees_no = params[:attendees].length
+    friends_no = params[:friends].values.map{ |s| s.to_i }.inject(:+)
+    attendees_no = friends_no + params[:attendees].length
 
     if attendees_no > 0
       @event.cost_per_person = @event.cost_total / attendees_no
-
-      for email in params[:attendees]
-        person = Person.find_by(email: email)
-
-        # add attendees into event
-        @event.people << person
-        # update each attendee's money
-        person.money = person.money - @event.cost_per_person
-
-        person.save
-      end
-
     end
 
+    for email in params[:attendees]
+      @event.people << Person.find_by(email: email)
+    end
 
     # @event.people << Person
     respond_to do |format|
       if @event.save
+
+        # update payer's money
+        payer = Person.find_by(id: @event.payer_id)
+        payer.money += @event.cost_total
+        payer.save
+        @event.save
+
+        # update each attendee's money
+        params[:attendees].each do |email|
+          person = Person.find_by(email: email)
+          person.money -= @event.cost_per_person * ( 1 + params[:friends][email].to_i)
+          person.save
+        end
+
+        # record the cost of each person at each event
+        params[:attendees].each do |email|
+          person = Person.find_by(email: email)
+          cost = Cost.new
+          cost.person_id = person.id
+          cost.event_id = @event.id
+          cost.money = @event.cost_per_person * ( 1 + params[:friends][email].to_i)
+          cost.save
+        end
+
+
         email_obj = {}
         email_obj["to"] = Person.all.map{|p| p.email}
         email_obj["subject"] = 'Badminton Expense Update'
         email_obj["body"] = render_to_body(:template => "events/index", :layout => false)
-        UserMailer.deliver_report(email_obj).deliver
+        # UserMailer.deliver_report(email_obj).deliver
 
         format.html { redirect_to @event, notice: 'Event was successfully created.' }
         format.json { render :show, status: :created, location: @event }
