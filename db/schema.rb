@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229143213) do
+ActiveRecord::Schema.define(version: 20141229151846) do
 
   create_table "costs", force: true do |t|
     t.float    "money"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20141229143213) do
     t.datetime "updated_at"
     t.integer  "person_id"
     t.integer  "event_id"
+    t.integer  "att_nr"
   end
 
   create_table "events", force: true do |t|
@@ -29,6 +30,7 @@ ActiveRecord::Schema.define(version: 20141229143213) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "payer_id"
+    t.integer  "att_nr"
   end
 
   create_table "events_people", id: false, force: true do |t|

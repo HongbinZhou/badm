@@ -33,6 +33,7 @@ class EventsController < ApplicationController
 
     friends_no = params[:friends].values.map{ |s| s.to_i }.inject(:+)
     attendees_no = friends_no + params[:attendees].length
+    @event.att_nr = attendees_no
 
     if attendees_no > 0
       @event.cost_per_person = @event.cost_total / attendees_no
@@ -65,7 +66,8 @@ class EventsController < ApplicationController
           cost = Cost.new
           cost.person_id = person.id
           cost.event_id = @event.id
-          cost.money = @event.cost_per_person * ( 1 + params[:friends][email].to_i)
+          cost.att_nr = ( 1 + params[:friends][email].to_i)
+          cost.money = @event.cost_per_person * cost.att_nr
           cost.save
         end
 

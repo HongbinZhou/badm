@@ -1,3 +1,4 @@
+
 <br>
 <h1>活动记录</h1>
 <table border='3'>
@@ -8,6 +9,7 @@
       <th rowspan="2">Payer</th>
       <th rowspan="1" colspan=<%= Person.all.length%>>People</th>
       <th rowspan="2">总花费</th>
+      <th rowspan="2">总人数</th>
       <th rowspan="2">人均</th>
       <th rowspan="2" colspan="3"></th>
     </tr>
@@ -34,13 +36,14 @@
 	<!-- list attendees -->
 	<% Person.all.each do |person| %>
 	  <% if event.people.exists?(person)%>
-	  <td><%= - Cost.find_by(event_id: event.id, person_id: person.id).money %></td>
+	  <td><%= " - #{event.cost_per_person}*#{Cost.find_by(event_id: event.id, person_id: person.id).att_nr}" %></td>
 	  <% else %>
           <td></td>
 	  <% end %>
 	<% end %>
 
         <td><%= event.cost_total %></td>
+        <td><%= event.att_nr %></td>
         <td><%= event.cost_per_person %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
@@ -75,4 +78,3 @@
 <br>
 <br>
 <%= link_to 'Users Info', people_path %>
-
