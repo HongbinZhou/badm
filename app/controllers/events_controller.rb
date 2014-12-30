@@ -64,11 +64,13 @@ class EventsController < ApplicationController
         params[:attendees].each do |email|
           person = Person.find_by(email: email)
           cost = Cost.new
-          cost.person_id = person.id
-          cost.event_id = @event.id
           cost.att_nr = ( 1 + params[:friends][email].to_i)
           cost.money = @event.cost_per_person * cost.att_nr
           cost.save
+
+          person.costs << cost
+          @event.costs << cost
+
         end
 
 
