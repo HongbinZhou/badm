@@ -36,15 +36,15 @@
 	<!-- list attendees -->
 	<% Person.all.each do |person| %>
 	  <% if event.people.exists?(person)%>
-	  <td><%= " - #{event.cost_per_person}*#{Cost.find_by(event_id: event.id, person_id: person.id).att_nr}" %></td>
+	  <td><%= " - #{event.cost_per_person.round(2)}*#{Cost.find_by(event_id: event.id, person_id: person.id).att_nr}" %></td>
 	  <% else %>
           <td></td>
 	  <% end %>
 	<% end %>
 
-        <td><%= event.cost_total %></td>
+        <td><%= event.cost_total.round(2) %></td>
         <td><%= event.att_nr %></td>
-        <td><%= event.cost_per_person %></td>
+        <td><%= event.cost_per_person.round(2) %></td>
         <td><%= link_to 'Show', event %></td>
         <td><%= link_to 'Edit', edit_event_path(event) %></td>
         <td><%= link_to 'Delete', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -58,7 +58,7 @@
       <th></th>
       <% Person.all.each do |person| %>
       <th scope="col">
-	<%= person.money %>
+	<%= person.money.round(2) %>
       </th>
       <% end %>
       <th></th>
