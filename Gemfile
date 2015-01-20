@@ -45,3 +45,6 @@ gem 'habtm_generator', :group => :development
 gem 'simple_form'
 
 gem 'byebug'
+
+# easy to use ENV[]
+gem "figaro"

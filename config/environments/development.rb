@@ -36,12 +36,17 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # send email
-  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :address => "smtp.nuance.com",
-    :port => "25",
+    :address              => "smtp.live.com",
+    :port                 => 587,
+    :enable_starttls_auto => true,
+    :user_name            => ENV["EMAIL"],
+    :password             => ENV["PASSWORD"],
+    :domain               => 'hotmail.com',
+    :authentication       => 'plain'
   }
 
 end

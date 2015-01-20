@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "hongbin.zhou@nuance.com"
+  default from: "a@a.com"
 
   def deliver_report(email)
     @email = email
