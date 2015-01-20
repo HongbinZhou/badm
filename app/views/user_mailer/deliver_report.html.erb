@@ -1,1 +1,64 @@
-<%= render :inline => @email["body"] %>
+<h2>活动记录</h2>
+<table border='3'>
+  <thead>
+    <tr>
+      <th rowspan="2">Date</th>
+      <th rowspan="2">Place</th>
+      <th rowspan="2">Payer</th>
+      <th rowspan="1" colspan=<%= Person.all.length%>>People</th>
+      <th rowspan="2">总花费</th>
+      <th rowspan="2">总人数</th>
+      <th rowspan="2">人均</th>
+      <th rowspan="2" colspan="3"></th>
+    </tr>
+    <tr>
+	<% Person.all.each do |person| %>
+	<th scope="col">
+	  <%= person.name %>
+	</th>
+	<% end %>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% Event.all.each do |event| %>
+      <tr>
+        <td><%= event.date %></td>
+        <td><%= event.place %></td>
+	<% if payer=Person.find_by(id: event.payer_id) %>
+        <td><%= payer.name %></td>
+	<% else %>
+        <td></td>	
+	<% end %>
+
+	<!-- list attendees -->
+	<% Person.all.each do |person| %>
+	  <% if event.people.exists?(person)%>
+	  <td><%= " - #{event.cost_per_person.round(2)}*#{Cost.find_by(event_id: event.id, person_id: person.id).att_nr}" %></td>
+	  <% else %>
+          <td></td>
+	  <% end %>
+	<% end %>
+
+        <td><%= event.cost_total.round(2) %></td>
+        <td><%= event.att_nr %></td>
+        <td><%= event.cost_per_person.round(2) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>余额合计</th>
+      <th></th>
+      <th></th>
+      <% Person.all.each do |person| %>
+      <th scope="col">
+	<%= person.money.round(2) %>
+      </th>
+      <% end %>
+      <th></th>
+      <th></th>
+      <th colspan="3"></th>
+    </tr>
+   </tfoot>
+</table>
