@@ -107,6 +107,21 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
+
+    # Cancle the cost of this event for each person
+    Person.all.each do |person|
+      cost = Cost.find_by(event_id: @event["id"], person_id: person["id"])
+      if cost
+        person.money += cost.money
+        person.save
+      end
+    end
+
+    # Cancle the payer's payment
+    payer = Person.find_by(id: @event.payer_id)
+    payer.money -= @event.cost_total
+    payer.save
+
     @event.destroy
     respond_to do |format|
       format.html { redirect_to events_url, notice: 'Event was successfully destroyed.' }
