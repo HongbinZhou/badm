@@ -48,3 +48,9 @@ gem 'byebug'
 
 # easy to use ENV[]
 gem "figaro"
+
+# use ember as FE
+# ref: https://www.airpair.com/ruby-on-rails/posts/ember-vs-angular-with-rails
+# ref: http://www.rubydoc.info/gems/ember-rails/0.17.0
+gem 'ember-rails'
+gem 'ember-source'

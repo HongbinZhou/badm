@@ -14,6 +14,8 @@ GEM
       activesupport (= 4.1.6)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_model_serializers (0.9.3)
+      activemodel (>= 3.2)
     activemodel (4.1.6)
       activesupport (= 4.1.6)
       builder (~> 3.1)
@@ -28,6 +30,9 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    barber (0.7.0)
+      ember-source
+      execjs
     builder (3.2.2)
     byebug (3.2.0)
       columnize (~> 0.8)
@@ -41,6 +46,17 @@ GEM
     coffee-script-source (1.8.0)
     columnize (0.8.9)
     debugger-linecache (1.2.0)
+    ember-data-source (1.0.0.beta.15)
+      ember-source (~> 1.8)
+    ember-rails (0.17.0)
+      active_model_serializers
+      barber (>= 0.7.0)
+      ember-data-source (>= 1.0.0.beta.5)
+      ember-source (>= 1.1.0)
+      execjs (>= 1.2)
+      jquery-rails (>= 1.0.17)
+      railties (>= 3.1)
+    ember-source (1.10.0)
     erubis (2.7.0)
     execjs (2.2.2)
     figaro (1.0.0)
@@ -122,6 +138,8 @@ PLATFORMS
 DEPENDENCIES
   byebug
   coffee-rails (~> 4.0.0)
+  ember-rails
+  ember-source
   figaro
   habtm_generator
   jbuilder (~> 2.0)
