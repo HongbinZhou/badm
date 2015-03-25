@@ -1,0 +1,14 @@
+
+* todo
+** Show the latest record first
+** Who can edit and delete?
+** If we have many records, can we show only latest 20 record?
+** Can we check any given amount of records? 
+** Delete one record correcty?
+* done
+** show all event
+** add an event 
+** show all users
+** add a user
+
+
