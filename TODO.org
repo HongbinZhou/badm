@@ -1,5 +1,6 @@
 
 * todo
+** don't fail when email deliver fail
 ** Show the latest record first
 ** Who can edit and delete?
 ** If we have many records, can we show only latest 20 record?
