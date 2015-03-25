@@ -54,3 +54,7 @@ gem "figaro"
 # ref: http://www.rubydoc.info/gems/ember-rails/0.17.0
 gem 'ember-rails'
 gem 'ember-source'
+
+gem 'bootstrap-sass', '~> 3.2.0'
+gem 'autoprefixer-rails'
+

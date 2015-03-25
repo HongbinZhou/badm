@@ -7,8 +7,27 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <!-- ref: http://www.gotealeaf.com/blog/integrating-rails-and-bootstrap-part-2 -->
+  <div id="main-container" class="container">
+    <div class="row">
+      <div class="col-xs-2">
+	<br><br>
+	<br><br>
+	<h4>More links</h4><br>
+	<%= link_to 'Events', events_path %><br>
+	<%= link_to 'New Event', new_event_path %><br><br>
 
-<%= yield %>
+	<%= link_to 'Users Info', people_path %><br>
+	<%= link_to 'New Person', new_person_path %><br>
+      </div>
 
+      <div class="col-xs-9">
+	<%= yield %>
+      </div>
+
+
+    </div>
+  </div>
+  
 </body>
 </html>
