@@ -79,10 +79,17 @@ class EventsController < ApplicationController
         email_obj["to"] = 'hongbin.zhou@nuance.com'
         email_obj["subject"] = 'Badminton Expense Update'
         email_obj["body"] = render_to_body(:template => "events/index", :layout => false)
-        UserMailer.deliver_report(email_obj).deliver
 
-        format.html { redirect_to @event, notice: 'Event was successfully created.' }
-        format.json { render :show, status: :created, location: @event }
+        begin
+          UserMailer.deliver_report(email_obj).deliver
+          format.html { redirect_to @event, notice: 'Event was successfully created. Email send successfully!' }
+          format.json { render :show, status: :created, location: @event }
+        rescue EOFError
+          flash[:success] = "creato. Problems sending mail"
+          format.html { redirect_to @event, notice: 'Event was successfully created. Email send failed!' }
+          format.json { render :show, status: :created, location: @event }
+        end
+
       else
         format.html { render :new }
         format.json { render json: @event.errors, status: :unprocessable_entity }
