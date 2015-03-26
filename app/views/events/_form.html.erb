@@ -27,7 +27,7 @@
       <% Person.all.each do |person| %>
       <tr>
 	<td>
-	  <%= check_box_tag 'attendees[]', person.email %>
+	  <%= check_box_tag 'event[attendees][]', person.email %>
 	  <%= label_tag person.name %>
 	</td>
 	<td>
