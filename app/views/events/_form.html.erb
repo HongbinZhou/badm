@@ -1,5 +1,5 @@
 
-<%= simple_form_for @event do |f| %>
+
 <% if @event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
@@ -12,41 +12,19 @@
     </div>
   <% end %>
 
+<%= simple_form_for @event do |f| %>
   <!-- date -->
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.date_select :date %>
-  </div>
+  <%= f.input :date, label: "时间：" %>
+  <%= f.input :place, label: "地点："%>
+  <%= f.input :cost_total, as: :float, label: "总花费："%>
+  <%= f.input :payer_id, collection: Person.all, label: "付账者："%>
 
-  <!-- place -->
-  <div class="field">
-    <%= f.label :place %><br>
-    <%= f.text_field :place %>
-  </div>
-
-  <!-- cost in total -->
-  <div class="field">
-    <%= f.label :cost_total %><br>
-    <%= f.text_field :cost_total %>
-  </div>
-
-
-  <!-- payer -->
-  <div class="field">
-
-    <%= f.label "Payer" %>
-    <%= f.select(
-	:payer_id,
-	options_from_collection_for_select(Person.all, "id", "name")
-	) %>
-
-  </div>
-
+</table>
   <!-- attendees -->
   <div class="field">
     <%= f.label "参加者:" %>
     <table>
-      <% @people.each do |person| %>
+      <% Person.all.each do |person| %>
       <tr>
 	<td>
 	  <%= check_box_tag 'attendees[]', person.email %>
@@ -61,7 +39,5 @@
     </table>
   </div>
 
-  <div class="actions">
     <%= f.submit %>
-  </div>
 <% end %>
