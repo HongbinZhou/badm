@@ -34,8 +34,8 @@
   <!-- payer -->
   <div class="field">
 
-    <%= label_tag "Payer" %>
-    <%= select_tag(
+    <%= f.label "Payer" %>
+    <%= f.select(
 	:payer_id,
 	options_from_collection_for_select(Person.all, "id", "name")
 	) %>

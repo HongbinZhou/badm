@@ -29,7 +29,6 @@ class EventsController < ApplicationController
   # POST /events.json
   def create
     @event = Event.new(event_params)
-    @event.payer_id = params[:payer_id]
 
     friends_no = params[:friends].values.map{ |s| s.to_i }.inject(:+)
     attendees_no = friends_no + params[:attendees].length
