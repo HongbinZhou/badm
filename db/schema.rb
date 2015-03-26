@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141229151846) do
+ActiveRecord::Schema.define(version: 20150326082211) do
 
   create_table "costs", force: true do |t|
     t.float    "money"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20141229151846) do
   create_table "events_people", id: false, force: true do |t|
     t.integer "event_id"
     t.integer "person_id"
+    t.integer "friends_number"
   end
 
   add_index "events_people", ["event_id", "person_id"], name: "events_people_index", unique: true
