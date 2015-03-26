@@ -21,7 +21,7 @@
   </thead>
 
   <tbody>
-    <% Event.all.each do |event| %>
+    <% Event.order(date: :desc).limit(10).each do |event| %>
       <tr>
         <td><%= event.date %></td>
         <td><%= event.place %></td>
