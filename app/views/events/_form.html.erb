@@ -1,6 +1,7 @@
 
+<%= simple_form_for @event do |f| %>
 
-<% if @event.errors.any? %>
+  <% if @event.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h2>
 
@@ -12,27 +13,23 @@
     </div>
   <% end %>
 
-<%= simple_form_for @event do |f| %>
   <!-- date -->
   <%= f.input :date, label: "时间：" %>
   <%= f.input :place, label: "地点："%>
   <%= f.input :cost_total, as: :float, label: "总花费：", placeholder: "0.0" %>
   <%= f.input :payer_id, collection: Person.all, label: "付账者："%>
 
+
 </table>
   <!-- attendees -->
   <div class="field">
-    <%= f.label "参加者:" %>
+    <%= f.label "参加者人数:" %>
     <table>
       <% Person.all.each do |person| %>
       <tr>
 	<td>
-	  <%= check_box_tag 'event[attendees][]', person.email %>
 	  <%= label_tag person.name %>
-	</td>
-	<td>
-	  <%= f.label :", 带朋友人数:" %>
-	  <%= text_field_tag "friends[#{person.email}]", "0" %>
+	  <%= text_field_tag "event[attendees][#{person.email}]", "0" %>
 	</td>
       </tr>
       <% end %>

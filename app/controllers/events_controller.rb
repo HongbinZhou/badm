@@ -30,21 +30,14 @@ class EventsController < ApplicationController
   def create
     @event = Event.new(event_params)
 
-    friends_no = params[:friends].values.map{ |s| s.to_i }.inject(:+)
-    attendees_no = friends_no + params[:attendees].length
-    @event.att_nr = attendees_no
-
-    if attendees_no > 0
-      @event.cost_per_person = @event.cost_total / attendees_no
-    end
-
-    for email in params[:attendees]
-      @event.people << Person.find_by(email: email)
-    end
-
-    # @event.people << Person
     respond_to do |format|
       if @event.save
+
+        @event.cost_per_person = @event.cost_total / @event.att_nr
+
+        event_attendees.each do |email, cnt|
+          @event.people << Person.find_by(email: email)
+        end
 
         # update payer's money
         payer = Person.find_by(id: @event.payer_id)
@@ -53,18 +46,18 @@ class EventsController < ApplicationController
         @event.save
 
         # update each attendee's money
-        params[:attendees].each do |email|
+        event_attendees.each do |email, cnt|
           person = Person.find_by(email: email)
-          person.money -= @event.cost_per_person * ( 1 + params[:friends][email].to_i)
+          person.money -= @event.cost_per_person * cnt
           person.save
         end
 
         # record the cost of each person at each event
-        params[:attendees].each do |email|
+        event_attendees.each do |email, cnt|
           person = Person.find_by(email: email)
           cost = Cost.new
-          cost.att_nr = ( 1 + params[:friends][email].to_i)
-          cost.money = @event.cost_per_person * cost.att_nr
+          cost.att_nr = cnt
+          cost.money = @event.cost_per_person * cnt
           cost.save
 
           person.costs << cost
@@ -143,6 +136,21 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:date, :place, :cost_total, :attendees, :payer_id)
+      p = params.require(:event).permit(:date, :place, :cost_total, :payer_id)
+
+      params.require(:event).permit(:attendees).tap do |event|
+        event[:attendees] = params[:event][:attendees]
+        p["att_nr"] = event[:attendees].values.map{ |s| s.to_i }.inject(:+)
+      end
+
+      return p
+    end
+
+    def event_attendees
+      attendees={}
+      params[:event][:attendees].each do |email, cnt|
+          attendees[email]=cnt.to_i if cnt.to_i > 0
+      end
+      attendees
     end
 end

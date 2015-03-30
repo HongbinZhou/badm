@@ -1,4 +1,6 @@
 
+
+* TODO remote cnt from cost table
 * TODO Who can edit and delete?
 * TODO Delete one record correctly?
 * TODO Can we check any given amount of records?
