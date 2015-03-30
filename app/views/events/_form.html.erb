@@ -16,7 +16,7 @@
   <!-- date -->
   <%= f.input :date, label: "时间：" %>
   <%= f.input :place, label: "地点："%>
-  <%= f.input :cost_total, as: :float, label: "总花费："%>
+  <%= f.input :cost_total, as: :float, label: "总花费：", placeholder: "0.0" %>
   <%= f.input :payer_id, collection: Person.all, label: "付账者："%>
 
 </table>
