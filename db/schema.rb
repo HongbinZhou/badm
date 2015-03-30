@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20150326082211) do
     t.datetime "updated_at"
     t.integer  "person_id"
     t.integer  "event_id"
-    t.integer  "att_nr"
+    t.integer  "att_nr"         # person together with his friends in one event
   end
 
   create_table "events", force: true do |t|
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20150326082211) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "payer_id"
-    t.integer  "att_nr"
+    t.integer  "att_nr"         # attendees of this event in total
   end
 
   create_table "events_people", id: false, force: true do |t|

@@ -1,7 +1,12 @@
 
 * TODO add page for each person's event record.
 [2015-03-30 Mon 18:12]
-* TODO remote cnt from cost table
+* CANCELLED remove cnt from cost table                            :CANCELLED:
+CLOSED: [2015-03-30 Mon 19:40]
+:LOGBOOK:  
+- State "CANCELLED"  from "TODO"       [2015-03-30 Mon 19:40] \\
+  att_nr of event and cost is different.
+:END:      
 [2015-03-30 Mon 18:12]
 * TODO Who can edit and delete?
 * TODO Delete one record correctly?
