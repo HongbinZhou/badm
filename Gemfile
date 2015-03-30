@@ -42,13 +42,16 @@ gem 'spring',        group: :development
 gem 'habtm_generator', :group => :development
 
 # https://github.com/plataformatec/simple_form#wrapping-rails-form-helpers
-gem 'simple_form'
+gem 'simple_form', '~> 3.1.0.rc1', github: 'plataformatec/simple_form', branch: 'master'
+# gem 'simple_form'
 
 gem 'byebug'
 
 # easy to use ENV[]
 gem "figaro"
 
-gem 'bootstrap-sass', '~> 3.2.0'
+gem 'bootstrap-sass', '~> 3.3.0'
+
+# gem 'bootstrap-sass', '~> 3.2.0'
 gem 'autoprefixer-rails'
 
