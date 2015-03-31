@@ -21,26 +21,20 @@
   <% end %>
 
   <!-- date -->
-  <%= f.input :date, label: "时间：" %>
-  <%= f.input :place, label: "地点："%>
-  <%= f.input :cost_total, as: :float, label: "总花费：", placeholder: "0.0" %>
-  <%= f.input :payer_id, collection: Person.all, label: "付账者："%>
+  <%= f.input :date, label: "时间" %>
+  <%= f.input :place, label: "地点"%>
+  <%= f.input :cost_total, as: :float, label: "总花费", placeholder: "0.0" %>
+  <%= f.input :payer_id, collection: Person.all, label: "付账者"%>
 
-</table>
-  <!-- attendees -->
-  <div class="field">
-    <%= f.label "参加者人数:" %>
-    <table>
-      <% Person.all.each do |person| %>
-      <tr>
-	<td>
-	  <%= label_tag person.name %>
-	  <%= text_field_tag "event[attendees][#{person.email}]", "0" %>
-	</td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
+<div class="form-group">
+  <label class="col-sm-3 control-label">
+    参加者人数
+  </label>
+</div>
 
-    <%= f.button :submit %>
+  <% Person.all.each do |person| %>
+  <%= f.input :"event[attendees][#{person.email}]", label: person.name, as: :fake, placeholder: "0" %>
+  <% end %>
+
+  <%= f.button :submit %>
 <% end %>
