@@ -1,0 +1,22 @@
+
+* What is this?
+This rails app is aim to help group to record their expense easily. In such scenarios you may find it is useful:
+  - Considering several colleagues always have lunch together, you can record the cost of each meal easily use this tool without AA pay everyday.
+  - When friends play badminton/basketball, it's also useful to record cost of each time.
+  - When several guy rent house together, they can use this tool to record water, gas and electricity bills.
+  - Team travel cost 
+
+* How to use?
+Firstly have a try from: http://54.69.160.243:8000/, if you still like it, then follow the steps:
+  
+  #+begin_src sh
+  git clone https://github.com/HongbinZhou/badm
+  bundle
+  rake db:migrate
+  rake db:seed
+  rails s
+  #+end_src
+
+Check from your brower: http://localhost:3000
+
+You can deploy it on your server if you like. 
